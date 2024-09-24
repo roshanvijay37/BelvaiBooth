@@ -83,16 +83,28 @@
 			padding: 20px 0; /* Increased padding to make space for the logo */
 			margin-bottom: 20px;
 		}
+		/* Logo styling */
+		.logo {
+			width: 100px; /* Adjust the size of the logo */
+			height: auto;
+			display: block;
+			margin: 0 auto 10px; /* Centers the logo and adds margin below */
+		}
     </style>
 </head>
-<header><h1>Booth Wise Contact Information - Belvai</h1></header>
+<header>
+<a href="index.html">
+        <a href="index.html">
+        <img src="bjplogo.svg" alt="Logo" class="logo">
+    </a>    </a>
+<h1>Booth Wise Contact Information - Belvai</h1>
+</header>
 <body>
     <table id="booth-table">
         <thead>
             <tr>
                 <th>Booth Number</th>
                 <th>Name</th>
-                <th>Designation</th>
                 <th>Phone Number</th>
                 <th>Actions</th>
             </tr>
@@ -156,13 +168,22 @@
             `;
         };
 
+        // Function to append (A) or (K) in front of names based on designation
+        const getFormattedName = (name, designation) => {
+            if (designation === "Adyaksha") {
+                return `(A) ${name}`;
+            } else if (designation === "Kaaryadarshi") {
+                return `(K) ${name}`;
+            }
+            return name;
+        };
+
         // Function to generate table rows
         booths.forEach(booth => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${booth.number}</td>
-                <td>${booth.name}</td>
-                <td>${booth.designation}</td>
+                <td>${getFormattedName(booth.name, booth.designation)}</td>
                 <td>${booth.phone}</td>
                 <td>${createButtonGroup(booth.phone)}</td>
             `;
